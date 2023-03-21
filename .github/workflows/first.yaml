@@ -1,0 +1,21 @@
+name: terraform commands
+
+on: 
+  - push
+
+env:
+  AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY}}
+  AWS_SECRET_ACCESS_KEY: ${{ secrtes.AWS_SECRET_ACCESS_KEY}}
+
+jobs:
+  terraform-workflow:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+      - name: Set terraform
+        uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.1.9
+      - name: Terraform init
+        run: terraform init
